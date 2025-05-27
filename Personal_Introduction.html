@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personal Introduction</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("img/IMG_7642.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.4); /* 半透明黑 */
+  pointer-events: none; /* 讓它不阻擋點擊 */
+  z-index: -1; /* 放在背景後面 */
+}
+
+    .section {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: #c7c3be;
+    }
+
+    .section-1 {
+      align-items: flex-end;
+      padding-right: 300px;
+    }
+
+    .section-1 h1 {
+      font-size: 120px;
+      margin: 20px 0;
+      padding-right: 50px;
+    }
+
+    .section h2 {
+      font-size: 60px;
+      margin: 10px 0;
+      color: #c7c3be;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .text-box {
+      flex: 1;
+      min-width: 200px;
+      max-width: 500px;
+      margin-right: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-align: center;
+    }
+
+    .text-box h2 {
+      font-size: 65px;
+      margin-bottom: 20px;
+    }
+
+    .text-box p {
+      font-size: 20px;
+      line-height: 2.5;
+      letter-spacing: 0.4em;
+      color: #e0ddd7;
+      text-align: center;
+    }
+
+    .image-box {
+      flex: 0 0 600px;
+      width: 600px;
+      height: 600px;
+      overflow: hidden;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .image-box img {
+      width: 120%;
+      height: 120%;
+      display: block;
+      object-fit: cover;
+      object-position: left bottom;
+    }
+
+    /* 這裡修改，讓section-2有相對定位，讓home-button以它為定位參考 */
+    .section-2 {
+      position: relative;
+    }
+
+    .home-button {
+      position: absolute; /* 改成絕對定位 */
+      bottom: 30px;
+      right: 30px;
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 25px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      border: 1px solid #ffffff;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .home-button:hover {
+      background-color: rgba(0, 0, 0, 1);
+    }
+
+    @media (max-width: 430px) {
+  /* 背景圖調整 */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+  }
+
+  /* 第一區塊置中 */
+  .section-1 {
+    display: flex;
+    flex-direction: column;   /* 讓h2, h1垂直排列 */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    text-align: center;
+  }
+
+  /* 第一區塊標題文字 */
+  .section-1 h1,
+  .section-1 h2 {
+    white-space: nowrap; /* 不換行 */
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .section-1 h1 {
+    font-size: 80px;
+  }
+
+  .section-1 h2 {
+    font-size: 32px;
+  }
+
+  /* 內容區塊排版調整 */
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+    width: 100%;
+  }
+
+  /* 文字區塊 */
+  .text-box {
+    text-align: center;
+    max-width: 100%;
+    border-radius: 20px;
+    margin: 20px 0;
+  }
+
+  .text-box h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  }
+
+  .text-box p {
+    font-size: 14px;
+    line-height: 2;
+    letter-spacing: 0.2em;
+    text-align: center;
+  }
+
+  /* 圖片區塊 */
+  .image-box {
+    width: 100%;
+    max-width: 330px;
+    height: 330px;
+    overflow: hidden;
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  .image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+  }
+
+  /* 按鈕樣式 */
+  .home-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 20px;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .home-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* 響應式設計 - iPad (768px-1024px) */
+@media (min-width: 430px) and (max-width: 1024px){
+ 
+  /* 第一區塊置中 */
+  .section-1 {
+    display: flex;
+    flex-direction: column;   /* 讓h2, h1垂直排列 */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    text-align: center;
+  }
+
+  /* 第一區塊標題文字 */
+  .section-1 h1,
+  .section-1 h2 {
+    white-space: nowrap; /* 不換行 */
+    margin: 10px 0;
+    text-align: center;
+  }
+
+ 
+
+  /* 內容區塊排版調整 */
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+    width: 100%;
+  }
+
+  /* 文字區塊 */
+  .text-box {
+    text-align: center;
+    max-width: 100%;
+    border-radius: 20px;
+    margin: 20px 0;
+  }
+
+ 
+
+  /* 圖片區塊 */
+  .image-box {
+    width: 100%;
+    max-width: 480px;
+    height: 480px;
+    overflow: hidden;
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  .image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+  }
+
+  /* 按鈕樣式 */
+  .home-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 20px;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .home-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <!-- 區塊 1 -->
+  <div class="section section-1">
+    <div class="heading-wrapper">
+    <h2>About me</h2>
+    <h1>Me</h1>
+    <h2>About art</h2>
+  </div>
+  </div>
+
+  <!-- 區塊 2：自我介紹 -->
+  <div class="section section-2">
+    <div class="content-wrapper">
+      <div class="text-box">
+        <h2>Twenty</h2>
+        <p>
+            2004.09.17<br>
+            出生高雄。20歲<br>
+            喜歡天馬行空的想像 開朗天真的個性<br>
+            喜歡跳躍在規則之上 <br>
+            回歸到最單純<br>
+        </p>
+      </div>
+      <div class="image-box">
+        <img src="img/截圖 2025-05-23 晚上7.35.36.png" alt="作品圖片" />
+      </div>
+    </div>
+    <!-- 按鈕放在section-2內，並由section-2的relative定位控制位置 -->
+    <a href="home.html" class="home-button">Back to Home</a>
+  </div>
+
+  <!-- JS 放最後 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 移除圖片點擊事件相關代碼
+    });
+  </script>
+</body>
+</html>
+
