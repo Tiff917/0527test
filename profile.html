@@ -143,22 +143,28 @@
         font-size: 14px;
       }
     }
-            /* ✅ 手機：max-width 429px */
+       /* ✅ 手機：max-width 429px */
 @media (max-width: 429px) {
     .header h1 {
-        font-size: 52px;
+        font-size: 28px;
     }
 
     .header h2 {
-        font-size: 24px;
+        font-size: 16px;
     }
 
     .section {
-        padding: 20px;
+        padding: 15px;
     }
 
     .section h3 {
-        font-size: 24px;
+        font-size: 22px;
+    }
+
+    .section-item {
+        flex: 1 1 100%;
+        margin-bottom: 15px;
+        border-left-width: 2px;
     }
 
     .section-item h4 {
@@ -167,31 +173,39 @@
 
     .section-item p,
     .section p {
-        font-size: 12px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .section-content {
+        flex-direction: column;
+        gap: 20px;
     }
 
     .image-container {
-        width: 250px;
-        height: 250px;
-        border-radius: 15px;
+        width: 100%;
+        max-width: 300px;
+        height: auto;
     }
 
     .home-button {
+        position: fixed;
+        bottom: 20px;
         right: 20px;
-        bottom: 0px;
-        font-size: 12px;
-        padding: 6px 12px;
+        font-size: 13px;
+        padding: 8px 14px;
+        z-index: 1000;
     }
 }
 
 /* ✅ 平板：430px–1024px */
 @media (min-width: 430px) and (max-width: 1024px) {
     .header h1 {
-        font-size: 40px;
+        font-size: 36px;
     }
 
     .header h2 {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .section {
@@ -199,32 +213,43 @@
     }
 
     .section h3 {
-        font-size: 28px;
+        font-size: 26px;
+    }
+
+    .section-item {
+        flex: 1 1 calc(50% - 20px);
+        margin-bottom: 20px;
     }
 
     .section-item h4 {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .section-item p,
     .section p {
-        font-size: 15px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .section-content {
+        flex-wrap: wrap;
+        gap: 20px;
     }
 
     .image-container {
-        width: 400px;
-        height: 400px;
-        border-radius: 20px;
+        width: 100%;
+        max-width: 400px;
+        height: auto;
     }
 
     .home-button {
-        right: 40px;
-        bottom: 0px;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
         font-size: 14px;
-        padding: 8px 16px;
+        padding: 10px 18px;
     }
 }
-
     @media (max-width: 429px), (min-width: 430px) and (max-width: 1024px) {
     .section-content {
         flex-direction: row;
