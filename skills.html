@@ -256,6 +256,19 @@
     }
 }
 
+    @media (max-width: 429px), (min-width: 430px) and (max-width: 1024px) {
+    .section-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .section-item {
+        flex: 0 0 calc(50% - 10px); /* 手機與平板上每個項目寬度約 50% */
+        margin-bottom: 10px;
+    }
     </style>
 </head>
 <body>
