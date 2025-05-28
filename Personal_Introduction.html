@@ -140,14 +140,39 @@
 
    @media (max-width: 430px) {
   html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* 移除 background-attachment: fixed; 手機會有問題 */
-  }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* 統一背景圖寫法：用 before 做背景層 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/IMG_7642.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: -2; /* 放最底層 */
+}
+
+/* 可選：加一層玻璃紙模糊半透明 */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2); /* 半透明白 */
+  backdrop-filter: blur(8px); /* 模糊效果 */
+  z-index: -1;
+}
 
   /* section-1 手機調整：置中排版 */
   .section-1 {
