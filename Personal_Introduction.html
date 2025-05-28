@@ -332,6 +332,17 @@
     document.addEventListener('DOMContentLoaded', function () {
       // 移除圖片點擊事件相關代碼
     });
+
+    <script>
+  window.addEventListener('scroll', function () {
+    const overlay = document.querySelector('.overlay');
+    if (window.scrollY > 850) {
+      overlay.style.display = 'block';
+    } else {
+      overlay.style.display = 'none';
+    }
+  });
+</script>
   </script>
 </body>
 </html>
