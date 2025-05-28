@@ -147,17 +147,7 @@
   font-family: Arial, sans-serif;
   overflow-x: hidden;
 }
-     .overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* 半透明黑 */
-  backdrop-filter: blur(6px);           /* 模糊背景 */
-  z-index: -1;                          /* 背景層 */
-  pointer-events: none;                /* 不阻擋點擊 */
-}
-
+ 
 /* 統一背景圖寫法：用 before 做背景層 */
 body::before {
   content: "";
