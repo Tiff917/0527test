@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+  scroll-behavior: smooth;
+}
+  :root {
+    --edge: 5px;
+    --gap: 20px;
+    --photo-base: min(30vw, 300px);
+    --radius: 20px;
+    --title-gap: 30px;
+  }
+  
+  body {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    background: #fff;
+    position: absolute;
+    margin-left: 50px;
+    z-index: 0;
+  }
+  
+  .bg-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('img/img拷貝/back.png') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.5;
+    z-index: -1;
+  }
+  
+  .wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 10px;
+    margin-left: 50px; /* 和 .section1 的 width 一樣 */
+    box-sizing: border-box;
+  }
+  
+  header, .header2 {
+    color: #595959;
+    width: 100%;
+     max-width: 1200px;
+    padding: 20px;
+    height: 150px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    overflow: hidden
+  }
+  
+  header {
+    background-color: #000000;
+  }
+  
+  .header2 {
+    background-color: rgba(72, 72, 72, 0.95);
+  }
+  
+  /* h1 統一樣式 */
+  h1 {
+    font-size: 150px;
+    text-align: left;
+    padding: 0;
+    margin: 0 0 -20px 20px;
+    color: #858585;
+    position: relative; /* 讓 z-index 生效 */
+    z-index: 999;
+    font-weight: normal;
+    max-width: var(--photo-base);
+  }
+  
+  /* 針對內文中的 h1 和 h2 樣式 */
+  h1, h2 {
+    margin-left: 0;
+    padding-left: 0;
+    text-align: left;
+    max-width: var(--photo-base);
+    margin-bottom: 10px;
+  }
+  
+  h1 {
+    font-size: 50px;
+    color: #ffffff;
+    font-weight: 500;
+    margin: 20px 0 10px 0;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+  }
+  
+  h2 {
+    font-size: 25px;
+    color: #464646;
+    font-weight: 500;
+    margin: 10px 0 30px 0;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+  }
+  
+  .divider {
+    width: 385px;
+    border: none;
+    border-top: 5px solid #bfbfbf;
+    margin: 10px auto 20px auto;
+    padding-left: 0;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* 側邊欄 */
+  .section1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #282828;
+    padding-top: 20px;
+    margin-top: 20px;
+    color: #c2c2c2;
+    z-index: 1000;
+    border: 1px solid #282828;
+    box-sizing: border-box;
+  }
+  
+  .section1-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .section1-list li {
+    color: #717171;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .section1-list a {
+    display: block;
+    padding: 15px 0;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+  }
+  
+  .section1-list a:last-child {
+    border-bottom: none;
+  }
+  
+  .section1-list a:hover {
+    background-color: rgba(0, 0, 0, 0);
+    color: #ffffff;
+  }
+  
+  /* 主要內容區塊 */
+  .section-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* Masonry Grid */
+  .grid {
+    width: 100%;
+  }
+  
+  .grid-sizer,
+  .grid-item {
+    width: 33.33%;
+    box-sizing: border-box;
+  }
+  
+  .grid-item {
+    padding: 4px;
+  }
+  
+  .grid-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+  }
+  
+  /* gallery */
+  .gallery {
+  column-count: 3;
+  column-gap: var(--gap);
+  position: relative;
+  z-index: 1;
+  margin-top: 30px;
+}
+  
+  .photo {
+    width: 100%;
+    margin-bottom: var(--gap);
+    break-inside: avoid;
+    display: inline-block;
+  }
+  
+  /* 圖片懸浮效果 */
+  .image-hover-container {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  
+  .hover-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: filter 0.3s ease;
+    border-radius: var(--radius);
+  }
+  
+  .hover-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: var(--radius);
+  }
+  
+  .image-hover-container:hover .hover-overlay {
+    opacity: 1;
+  }
+  
+  .image-hover-container:hover .hover-image {
+    filter: brightness(70%);
+  }
+  
+  /* 大圖放大遮罩 */
+  .overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .enlarged {
+    max-width: 90vw;
+    max-height: 90vh;
+    padding: 0;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+  
+  .enlarged img {
+    max-width: 80vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: var(--radius);
+  }
+  
+  /* 前後按鈕 */
+  .prev-button, .next-button {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(78, 78, 78, 0.5);
+    color: rgb(206, 206, 206);
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+    border-radius: var(--radius);
+    opacity: 0.5;
+  }
+  
+  .prev-button {
+    left: 15px;
+  }
+  
+  .next-button {
+    right: 15px;
+  }
+  
+  .home-button {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 25px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  border: 1px solid #ffffff;
+  z-index: 1000;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+}
+    .home-button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+ 
+.header2 h1 {
+  font-size: 100px;
+  text-align: left;
+  padding: 0 0 25px 0;
+  margin: -15px 0 20px 20px;
+  color: #d3d3d3;
+  position: absolute;
+  top: 70px;
+  left: 30px;
+  z-index: 999;
+  font-weight: normal;
+  max-width: var(--photo-base);
+}
+  #sectionA,#sectionB,#sectionC,#sectionD {
+  scroll-margin-top: 100px; /* 根據你的 header 高度調整 */
+}
+
+.section2 {
+  margin-left: 20px; /* 取消重複留白 */
+  width: calc(100vw - 100px); /* 撐滿剩餘空間 */
+  padding: 20px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+.section1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(151, 150, 150, 0.3);
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: 1000;
+  border: none; /* 去除框線 */
+  border-radius: 5px;
+}
+
+/* 隱藏列表 */
+.section1-list {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  background-color: rgba(151, 150, 150, 0.9);
+  width: 150px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+/* 展開選單 */
+#menu-toggle:checked + .hamburger + .section1-list {
+  display: block;
+}
+
+/* 漢堡圖示 */
+.hamburger {
+    position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 30px;
+  color: #adadad;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  border: none; /* 去除框線 */
+  background: none; /* 背景透明 */
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+  align-self: center;
+}
+
+.hamburger:focus,
+.hamburger:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+.hamburger::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.hamburger,
+.hamburger:focus,
+.hamburger:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.hamburger::-moz-focus-inner {
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+/* 選單項目 */
+.section1-list li a {
+  display: block;
+  padding: 10px 15px;
+  color: #adadad;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section1-list li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* 隱藏checkbox */
+#menu-toggle {
+  display: none;
+}
+
+.image-text-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.image-text-pair {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.image-text-pair img {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.image-text-pair .text {
+  max-width: 50%;
+}
+
+.image-text-pair .text h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.image-text-pair .text p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* 若要交錯左右圖文，可加這段 */
+.image-text-pair:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.menu {
+  display: none;
+  transition: all 0.3s ease;
+}
+.menu.show {
+  display: block;
+}
+nav ul {
+  display: none;
+  /* 或者使用 transform、opacity */
+  transition: all 0.3s ease;
+}
+
+nav ul.show {
+  display: block; /* 或 flex，視情況 */
+}
+.section1-list.show {
+  display: block !important;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+  /* 響應式 */
+  @media (max-width: 768px) {
+    .gallery {
+      column-count: 2;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .gallery {
+      column-count: 1;
+    }
+  }
+  </style>
+</head>
+<body>
+    <section class="section0">
+        
+   </section>  
+    <header>
+        <div class="header2">
+        <h1>手繪</h1>
+        </div>
+    </header>
+    
+    
+    <main>
+        <div class="section-container">
+            <section class="section1">
+                <div class="hamburger">☰</div>
+                <ul class="section1-list">
+                  <li><a href="052802.html">作品集</a></li>
+                  <li><a href="#sectionB">電繪</a></li>
+                  <li><a href="#sectionC">攝影</a></li>
+                  <li><a href="#sectionD">專案</a></li>
+                </ul>
+              </section>                         
+                <div class="bg-overlay"></div>
+                <div class="image-text-gallery">
+                    <div class="image-text-pair">
+                      <img src="img/img拷貝/靜物素描07.png" alt="靜物素描01">
+                      <div class="text">
+                        <h3>望劫</h3>
+                        <p>創作時間：2022 年</p>
+                        <p>創作媒材：炭筆</p>
+                        <p>這幅素描以細膩的筆觸刻畫一名古代女戰士，她身披斑駁鎧甲，頭盔下的目光凝視天際，眼角懸著一滴將落未落的淚珠。背景中，機械結構如荊棘般纏繞自然景物——齒輪碾壓枯枝、金屬管線穿刺雲層，科技與自然的衝突在靜默中迸發。女戰士的形象既是見證者亦是犧牲者，她的淚水隱喻人類在文明進程中對環境的剝奪與內疚。作品名「望劫」直指「仰望劫難」的雙重意境：既仰望科技帶來的浩劫，亦隱含對救贖的渺茫期盼。炭灰質感強化了壓抑的末世氛圍，而淚珠的透明感成為畫面唯一的光源，暗示脆弱中的覺醒。</p>                    
+                      </div>
+                    </div>
+                  
+                    <div class="image-text-pair">
+                      <img src="img/img拷貝/靜物素描08.png" alt="靜物素描02">
+                      <div class="text">
+                        <h3>荒漠</h3>
+                        <p>創作時間：2023 年</p>
+                        <p>創作媒材：炭筆</p>
+                        <p>這幅質感練習作品以「荒漠」為名，透過極端對比的媒材構築視覺張力：中央的羊頭骨以硬筆技法雕琢，每一道裂痕與風化紋理皆呼應生命的消逝；背景中撕貼殘缺的紙膠帶隨機交疊，形成虛實交錯的空間層次，暗示記憶的碎片化。畫面左下角一顆飽滿的柑橘以超寫實筆觸呈現，果皮油胞與葉脈纖毫畢現，其鮮活生機與乾枯頭骨形成荒謬對話。作品透過「堅硬／柔韌」、「死亡／新生」的物質辯證，隱喻文明在資源掠奪後的荒蕪景觀，而膠帶的工業感黏著痕跡，進一步強化了人為介入自然的暴力詩學。</p>
+                      </div>
+                    </div>
+                  
+                    <div class="image-text-pair">
+                      <img src="img/img拷貝/產品01.jpg" alt="產品素描01">
+                      <div class="text">
+                        <h3>水龍頭</h3>
+                        <p>創作時間：2023 年</p>
+                        <p>創作媒材：鉛筆</p>
+                        <p>這幅精細素描專注於模擬不鏽鋼水龍頭的極致質感，耗時三倍於常規作品，透過顯微鏡般的觀察捕捉金屬與光影的共生關係：水流轉折處的銳利高光與深淵般的反光交錯，管身弧面映射扭曲的空間倒影，甚至螺紋接縫的細微氧化斑點皆被刻意強化。</p>
+                      </div>
+                    </div>
+                  
+                    <div class="image-text-pair">
+                      <img src="img/img拷貝/產品03.jpg" alt="產品素描02">
+                      <div class="text">
+                        <h3>產品素描</h3>
+                        <p>創作時間：2023 年</p>
+                        <p>創作媒材：鉛筆</p>
+                        <p>這組滑鼠產品素描以三視角正交投影結合30度動態透視，精準解構工業設計的幾何基因。頂視圖強化按鍵分模線的硬邊陰影，側視圖以漸變排線呈現防滑橡膠的微粒觸感，而前視圖的鏤空滾輪結構則透過交叉線條揭露內部軸承機構。刻意省略底面以保持「工業懸念」，並以未完成的輔助線暗示設計流程中的理性推演。作品透過2D線條重現3D產品的觸覺記憶，在紙面上凝固了塑料射出成型與人體工學的對話瞬間。</p>
+                      </div>
+                    </div>
+                  
+                    <div class="image-text-pair">
+                      <img src="img/img拷貝/風景水彩01.png" alt="風景水彩01">
+                      <div class="text">
+                        <h3>鄉村風光</h3>
+                        <p>創作時間：2022 年</p>
+                        <p>創作媒材：水彩</p>
+                        <p>這幅水彩作品以層疊的綠意譜寫鄉村的生命力——前景的稻田用濕畫法暈染出風拂過的漣漪，中景農舍的紅瓦屋頂以乾筆觸點綴，與後景山嵐的透明水色形成冷暖節奏。刻意保留的鉛筆草稿線條，暗示風景背後的幾何構圖邏輯，而跳動的飛白筆觸則捕捉了雞群掠過草叢的動態瞬間。作品在寫實中注入詩意，將水彩的偶然性化為晨霧裡的光影辯證，重現記憶中永不褪色的鄉野時光。</p>
+                      </div>
+                    </div>
+                  
+                    <div class="image-text-pair">
+                      <img src="img/img拷貝/0529.png" alt="產品素描03">
+                      <div class="text">
+                        <h3>三點透視ps關於我的設計</h3>
+                        <p>創作時間：2022 年</p>
+                        <p>創作媒材：色鉛筆</p>
+                        <p>以20個立方體在三點透視中重構「Tiff」字母。嚴格消失點，僅用黑白灰三色，定義面與面的轉折，明線銳利劃分空間層次。
+
+                            方塊排列簡化為純粹的幾何堆疊，灰階梯度模擬字母「T」的結構張力，留白處暗示字形的負空間。</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+              
+                <a href="profile.html" class="home-button">Back to Profile</a>
+              
+                <!-- 放大彈出層 -->
+                <div class="overlay" id="imageOverlay" tabindex="-1" aria-hidden="true">
+                  <button class="prev-button" id="prevBtn" aria-label="上一張圖片">&#10094;</button>
+                  <div class="enlarged" role="dialog" aria-modal="true" aria-label="圖片放大視窗">
+                    <img id="enlargedImage" src="" alt="放大圖片" />
+                  </div>
+                  <button class="next-button" id="nextBtn" aria-label="下一張圖片">&#10095;</button>
+                </div>
+              
+                <script>
+                    window.addEventListener('DOMContentLoaded', () => {
+                      const overlay = document.getElementById('imageOverlay');
+                      const enlargedImage = document.getElementById('enlargedImage');
+                      const prevBtn = document.getElementById('prevBtn');
+                      const nextBtn = document.getElementById('nextBtn');
+                  
+                      // 尋找所有圖片
+                      const images = Array.from(document.querySelectorAll('.image-text-pair img'));
+                      let currentIndex = -1;
+                  
+                      // 顯示放大圖片
+                      function showImage(index) {
+                        if (images.length === 0) return;
+                  
+                        if (index < 0) index = images.length - 1;
+                        if (index >= images.length) index = 0;
+                  
+                        currentIndex = index;
+                        enlargedImage.src = images[currentIndex].src;
+                        overlay.classList.add('active');
+                      }
+                  
+                      // 關閉放大視窗
+                      function closeOverlay() {
+                        overlay.classList.remove('active');
+                        enlargedImage.src = '';
+                      }
+                  
+                      // 點擊圖片開啟放大
+                      images.forEach((img, index) => {
+                        img.style.cursor = 'pointer';
+                        img.addEventListener('click', () => {
+                          showImage(index);
+                        });
+                      });
+                  
+                      // 前後按鈕功能
+                      prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+                      nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+                  
+                      // 點擊空白處或按 Esc 關閉
+                      overlay.addEventListener('click', (e) => {
+                        if (e.target === overlay) closeOverlay();
+                      });
+                      document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape') closeOverlay();
+                        if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+                        if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+                      });
+                    });
+
+                    // 漢堡選單控制
+                    const hamburger = document.querySelector('.hamburger');
+                const section1List = document.querySelector('.section1-list');
+                let autoCloseTimer = null;
+
+                hamburger.addEventListener('click', () => {
+                section1List.classList.toggle('show');
+
+                if (autoCloseTimer) clearTimeout(autoCloseTimer);
+
+                if (section1List.classList.contains('show')) {
+                    autoCloseTimer = setTimeout(() => {
+                    section1List.classList.remove('show');
+                    }, 5000); // 5秒後自動收起
+                }
+                });
+
+                  </script>
+                
+              
+</body>
+</html>
