@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>手繪</title>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
@@ -25,13 +25,12 @@
   }
   
   body {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     font-family: 'Noto Sans TC', sans-serif;
     background: #fff;
-    position: absolute;
-    margin-left: 50px;
+    position: relative;
     z-index: 0;
   }
   
@@ -40,27 +39,25 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background: url('img/img拷貝/back.png') no-repeat center center fixed;
     background-size: cover;
-    opacity: 0.5;
-    z-index: -1;
+    opacity: 0.3;
+    z-index: 0;
   }
   
   .wrapper {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 10px;
-    margin-left: 50px; /* 和 .section1 的 width 一樣 */
+    margin-left: 100px; /* 和 .section1 的 width 一樣 */
     box-sizing: border-box;
   }
   
   header, .header2 {
     color: #595959;
-    width: 100%;
-     max-width: 1200px;
     padding: 20px;
     height: 150px;
     margin: 10px 0;
+    width: 1250px;
     box-sizing: border-box;
-    overflow: hidden
   }
   
   header {
@@ -93,15 +90,7 @@
     margin-bottom: 10px;
   }
   
-  h1 {
-    font-size: 50px;
-    color: #ffffff;
-    font-weight: 500;
-    margin: 20px 0 10px 0;
-    text-align: center;
-    z-index: 1;
-    position: relative;
-  }
+  
   
   h2 {
     font-size: 25px;
@@ -109,7 +98,7 @@
     font-weight: 500;
     margin: 10px 0 30px 0;
     text-align: center;
-    z-index: 1;
+    z-index: 999;
     position: relative;
   }
   
@@ -129,6 +118,8 @@
     position: fixed;
     top: 0;
     left: 0;
+    width: 100px;
+    height: 300px;
     background-color: #282828;
     padding-top: 20px;
     margin-top: 20px;
@@ -288,8 +279,8 @@
   }
   
   .enlarged img {
-    max-width: 80vw;
-    max-height: 80vh;
+    max-width: 90vw;
+    max-height: 90vh;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -334,14 +325,16 @@
   border: 1px solid #ffffff;
   z-index: 1000;
   cursor: pointer;
-  position: absolute;
-  bottom: 20px;
 }
     .home-button:hover {
       background-color: rgba(0, 0, 0, 0.8);
     }
 
- 
+    .home-button {
+  position: absolute;
+  bottom: 20px;
+  right: 1030px;
+}
 .header2 h1 {
   font-size: 100px;
   text-align: left;
@@ -467,6 +460,8 @@
   gap: 40px;
   padding: 20px;
   margin-top: 20px;
+  position: relative; /* 讓 z-index 生效 */
+  z-index: 999;
 }
 
 .image-text-pair {
@@ -501,29 +496,6 @@
 .image-text-pair:nth-child(even) {
   flex-direction: row-reverse;
 }
-.menu {
-  display: none;
-  transition: all 0.3s ease;
-}
-.menu.show {
-  display: block;
-}
-nav ul {
-  display: none;
-  /* 或者使用 transform、opacity */
-  transition: all 0.3s ease;
-}
-
-nav ul.show {
-  display: block; /* 或 flex，視情況 */
-}
-.section1-list.show {
-  display: block !important;
-}
-
-html, body {
-  overflow-x: hidden;
-}
   /* 響應式 */
   @media (max-width: 768px) {
     .gallery {
@@ -545,15 +517,18 @@ html, body {
     <header>
         <div class="header2">
         <h1>手繪</h1>
+        <nav>
+            
+        </nav>
         </div>
     </header>
     
     
     <main>
-        <div class="section-container">
-            <section class="section1">
-                <div class="hamburger">☰</div>
-                <ul class="section1-list">
+        <section class="section1">
+            <input type="checkbox" id="menu-toggle" />
+            <label for="menu-toggle" class="hamburger">☰</label>
+            <ul class="section1-list">
                   <li><a href="052802.html">作品集</a></li>
                   <li><a href="#sectionB">電繪</a></li>
                   <li><a href="#sectionC">攝影</a></li>
@@ -624,90 +599,89 @@ html, body {
                       </div>
                     </div>
                   </div>
-                  
               
                 <a href="profile.html" class="home-button">Back to Profile</a>
               
                 <!-- 放大彈出層 -->
                 <div class="overlay" id="imageOverlay" tabindex="-1" aria-hidden="true">
-                  <button class="prev-button" id="prevBtn" aria-label="上一張圖片">&#10094;</button>
-                  <div class="enlarged" role="dialog" aria-modal="true" aria-label="圖片放大視窗">
-                    <img id="enlargedImage" src="" alt="放大圖片" />
+                    <button class="prev-button" id="prevBtn" aria-label="上一張圖片">&#10094;</button>
+                    <div class="enlarged" role="dialog" aria-modal="true" aria-label="圖片放大視窗">
+                      <img id="enlargedImage" src="" alt="放大圖片" />
+                    </div>
+                    <button class="next-button" id="nextBtn" aria-label="下一張圖片">&#10095;</button>
                   </div>
-                  <button class="next-button" id="nextBtn" aria-label="下一張圖片">&#10095;</button>
-                </div>
-              
-                <script>
-                    window.addEventListener('DOMContentLoaded', () => {
-                      const overlay = document.getElementById('imageOverlay');
-                      const enlargedImage = document.getElementById('enlargedImage');
-                      const prevBtn = document.getElementById('prevBtn');
-                      const nextBtn = document.getElementById('nextBtn');
-                  
-                      // 尋找所有圖片
-                      const images = Array.from(document.querySelectorAll('.image-text-pair img'));
-                      let currentIndex = -1;
-                  
-                      // 顯示放大圖片
-                      function showImage(index) {
-                        if (images.length === 0) return;
-                  
-                        if (index < 0) index = images.length - 1;
-                        if (index >= images.length) index = 0;
-                  
-                        currentIndex = index;
-                        enlargedImage.src = images[currentIndex].src;
-                        overlay.classList.add('active');
-                      }
-                  
-                      // 關閉放大視窗
-                      function closeOverlay() {
-                        overlay.classList.remove('active');
-                        enlargedImage.src = '';
-                      }
-                  
-                      // 點擊圖片開啟放大
-                      images.forEach((img, index) => {
-                        img.style.cursor = 'pointer';
-                        img.addEventListener('click', () => {
-                          showImage(index);
+                
+                  <script>
+                      window.addEventListener('DOMContentLoaded', () => {
+                        const overlay = document.getElementById('imageOverlay');
+                        const enlargedImage = document.getElementById('enlargedImage');
+                        const prevBtn = document.getElementById('prevBtn');
+                        const nextBtn = document.getElementById('nextBtn');
+                    
+                        // 尋找所有圖片
+                        const images = Array.from(document.querySelectorAll('.image-text-pair img'));
+                        let currentIndex = -1;
+                    
+                        // 顯示放大圖片
+                        function showImage(index) {
+                          if (images.length === 0) return;
+                    
+                          if (index < 0) index = images.length - 1;
+                          if (index >= images.length) index = 0;
+                    
+                          currentIndex = index;
+                          enlargedImage.src = images[currentIndex].src;
+                          overlay.classList.add('active');
+                        }
+                    
+                        // 關閉放大視窗
+                        function closeOverlay() {
+                          overlay.classList.remove('active');
+                          enlargedImage.src = '';
+                        }
+                    
+                        // 點擊圖片開啟放大
+                        images.forEach((img, index) => {
+                          img.style.cursor = 'pointer';
+                          img.addEventListener('click', () => {
+                            showImage(index);
+                          });
+                        });
+                    
+                        // 前後按鈕功能
+                        prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+                        nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+                    
+                        // 點擊空白處或按 Esc 關閉
+                        overlay.addEventListener('click', (e) => {
+                          if (e.target === overlay) closeOverlay();
+                        });
+                        document.addEventListener('keydown', (e) => {
+                          if (e.key === 'Escape') closeOverlay();
+                          if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+                          if (e.key === 'ArrowRight') showImage(currentIndex + 1);
                         });
                       });
+  
+                      // 漢堡選單控制
+                      const hamburger = document.querySelector('.hamburger');
+                  const section1List = document.querySelector('.section1-list');
+                  let autoCloseTimer = null;
+  
+                  hamburger.addEventListener('click', () => {
+                  section1List.classList.toggle('show');
+  
+                  if (autoCloseTimer) clearTimeout(autoCloseTimer);
+  
+                  if (section1List.classList.contains('show')) {
+                      autoCloseTimer = setTimeout(() => {
+                      section1List.classList.remove('show');
+                      }, 5000); // 5秒後自動收起
+                  }
+                  });
+  
+                    </script>
                   
-                      // 前後按鈕功能
-                      prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
-                      nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
-                  
-                      // 點擊空白處或按 Esc 關閉
-                      overlay.addEventListener('click', (e) => {
-                        if (e.target === overlay) closeOverlay();
-                      });
-                      document.addEventListener('keydown', (e) => {
-                        if (e.key === 'Escape') closeOverlay();
-                        if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
-                        if (e.key === 'ArrowRight') showImage(currentIndex + 1);
-                      });
-                    });
-
-                    // 漢堡選單控制
-                    const hamburger = document.querySelector('.hamburger');
-                const section1List = document.querySelector('.section1-list');
-                let autoCloseTimer = null;
-
-                hamburger.addEventListener('click', () => {
-                section1List.classList.toggle('show');
-
-                if (autoCloseTimer) clearTimeout(autoCloseTimer);
-
-                if (section1List.classList.contains('show')) {
-                    autoCloseTimer = setTimeout(() => {
-                    section1List.classList.remove('show');
-                    }, 5000); // 5秒後自動收起
-                }
-                });
-
-                  </script>
                 
-              
 </body>
 </html>
