@@ -6,6 +6,7 @@
     <title>手繪</title>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <style>
 * {
@@ -533,10 +534,34 @@ header, .header2 {
       column-count: 1;
     }
   }
+  @media (max-width: 1024px) {
+  /* 平板與手機共用區 */
+  .wrapper, .section2, header, .header2 {
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 430px) {
+  /* 手機專用區 */
+  h1 {
+    font-size: 50px;
+  }
+
+  .image-text-pair {
+    flex-direction: column;
+  }
+
+  .image-text-pair img, .image-text-pair .text {
+    width: 100%;
+    max-width: 100%;
+  }
+}
   </style>
 </head>
 <body>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <section class="section0">
         
    </section>  
