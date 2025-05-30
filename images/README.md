@@ -7,4 +7,4 @@
 ![0203](https://raw.githubusercontent.com/Tiff917/0527test/main/images/hand0203.png)
 ![0204](https://raw.githubusercontent.com/Tiff917/0527test/main/images/hand0204.png)
 ![0205](https://raw.githubusercontent.com/Tiff917/0527test/main/images/hand0205.png)
-![0206](https://raw.githubusercontent.com/Tiff917/0527test/main/images/hand0206.png)
+![02006](https://raw.githubusercontent.com/Tiff917/0527test/main/images/hand02006.png)
