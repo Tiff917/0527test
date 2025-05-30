@@ -496,6 +496,31 @@
 .image-text-pair:nth-child(even) {
   flex-direction: row-reverse;
 }
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+header, .header2 {
+  width: 100%;
+  max-width: 1250px;
+}
+
+.section2 {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
   /* 響應式 */
   @media (max-width: 768px) {
     .gallery {
@@ -511,6 +536,7 @@
   </style>
 </head>
 <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <section class="section0">
         
    </section>  
