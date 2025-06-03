@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>顏色分析工具</title>
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif, Arial;
+      background: #f5f7fa;
+      padding: 40px 20px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      color: #222;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    input[type="file"] {
+      margin-bottom: 30px;
+      font-size: 1rem;
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: 1.5px solid #ccc;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+    input[type="file"]:hover {
+      border-color: #4285f4;
+    }
+
+    #canvas {
+      border-radius: 12px;
+      border: 2px solid #ddd;
+      cursor: crosshair;
+      background: white;
+      max-width: 100%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+      transition: border-color 0.3s ease;
+    }
+    #canvas:hover {
+      border-color: #4285f4;
+      box-shadow: 0 12px 25px rgba(66,133,244,0.3);
+    }
+
+    #colorBox {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    border: 3px solid #222;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease;
+    background-color: #fff; /* 這行加上 */
+    }
+
+
+    #rgb, #hex {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 6px 0;
+      user-select: text;
+    }
+
+    button {
+      background-color: #a7a7a7;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 1rem;
+      border-radius: 8px;
+      margin: 10px 8px 0 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.2s ease;
+      user-select: none;
+      box-shadow: 0 4px 10px rgba(60, 60, 60, 0.3);
+    }
+    button:hover {
+      background-color: #686868;
+      box-shadow: 0 6px 15px rgba(60, 60, 60, 0.3);
+    }
+    button:active {
+      background-color: #a7a7a7;
+      box-shadow: none;
+    }
+
+    #copyStatus {
+      margin-top: 15px;
+      height: 24px;
+      font-size: 1rem;
+      color: #434343;
+      font-weight: 700;
+      min-width: 140px;
+      text-align: center;
+      user-select: none;
+      transition: opacity 0.5s ease;
+    }
+
+    /* 小提示淡出 */
+    #copyStatus.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    @media (min-width: 600px) {
+    #container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+}
+  </style>
+</head>
+<body>
+
+  <h2>顏色分析工具</h2>
+  <div id="container">
+    <input type="file" id="upload" accept="image/*" />
+    <canvas id="canvas" width="400" height="400"></canvas>
+  
+    <div id="colorBox"></div>
+    <div id="rgb">RGB:</div>
+    <div id="hex">HEX:</div>
+  
+    <button id="copyRgb">複製 RGB</button>
+    <button id="copyHex">複製 HEX</button>
+    <div id="copyStatus" class="hide"></div>
+  </div>
+  <script>
+    const upload = document.getElementById("upload");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const colorBox = document.getElementById("colorBox");
+    const rgbText = document.getElementById("rgb");
+    const hexText = document.getElementById("hex");
+    const copyRgbBtn = document.getElementById("copyRgb");
+    const copyHexBtn = document.getElementById("copyHex");
+    const copyStatus = document.getElementById("copyStatus");
+  
+    let isDragging = false, startX, startY;
+  
+    upload.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+  
+      const img = new Image();
+      img.onload = () => {
+        // 根據圖片比例設定 canvas 高度（保持寬度 400）
+        const aspectRatio = img.naturalHeight / img.naturalWidth;
+        canvas.width = 400;
+        canvas.height = 400 * aspectRatio;
+  
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+      img.src = URL.createObjectURL(file);
+    });
+  
+    canvas.addEventListener("mousedown", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      startX = e.clientX - rect.left;
+      startY = e.clientY - rect.top;
+      isDragging = true;
+    });
+  
+    canvas.addEventListener("mouseup", (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+  
+      const rect = canvas.getBoundingClientRect();
+      const endX = e.clientX - rect.left;
+      const endY = e.clientY - rect.top;
+  
+      const x = Math.min(startX, endX);
+      const y = Math.min(startY, endY);
+      const w = Math.abs(startX - endX);
+      const h = Math.abs(startY - endY);
+  
+      if (w === 0 || h === 0) return;
+  
+      const data = ctx.getImageData(x, y, w, h).data;
+      let r = 0, g = 0, b = 0, count = 0;
+  
+      for (let i = 0; i < data.length; i += 4) {
+        r += data[i];
+        g += data[i + 1];
+        b += data[i + 2];
+        count++;
+      }
+  
+      r = Math.round(r / count);
+      g = Math.round(g / count);
+      b = Math.round(b / count);
+  
+      updateColor(r, g, b);
+    });
+  
+    canvas.addEventListener("click", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const pixel = ctx.getImageData(x, y, 1, 1).data;
+      const [r, g, b] = pixel;
+      updateColor(r, g, b);
+    });
+  
+    function updateColor(r, g, b) {
+      const hex = `#${[r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')}`;
+      colorBox.style.backgroundColor = `rgb(${r},${g},${b})`;
+      rgbText.innerText = `RGB: ${r}, ${g}, ${b}`;
+      hexText.innerText = `HEX: ${hex}`;
+    }
+  
+    copyRgbBtn.addEventListener("click", () => {
+      const text = rgbText.innerText.replace("RGB: ", "");
+      navigator.clipboard.writeText(text).then(() => {
+        showCopied("RGB 已複製！");
+      });
+    });
+  
+    copyHexBtn.addEventListener("click", () => {
+      const text = hexText.innerText.replace("HEX: ", "");
+      navigator.clipboard.writeText(text).then(() => {
+        showCopied("HEX 已複製！");
+      });
+    });
+  
+    function showCopied(message) {
+      copyStatus.innerText = message;
+      copyStatus.classList.remove("hide");
+      setTimeout(() => {
+        copyStatus.classList.add("hide");
+      }, 1500);
+    }
+  
+    updateColor(255, 255, 255); // 預設白
+  </script>
+  
+</body>
+</html>
