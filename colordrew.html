@@ -246,6 +246,101 @@
     }
   
     updateColor(255, 255, 255); // 預設白
+
+    // 新增這個事件，監聽整個頁面點擊
+document.body.addEventListener("click", async (e) => {
+  // 忽略點擊canvas上的事件，避免重複觸發
+  if (e.target === canvas) return;
+
+  const x = e.clientX;
+  const y = e.clientY;
+
+  // 找出點擊位置的元素
+  const elem = document.elementFromPoint(x, y);
+  if (!elem) return;
+
+  // 如果是圖片元素，嘗試從圖片像素取色
+  if (elem.tagName.toLowerCase() === "img") {
+    try {
+      const color = await getColorFromImageAtPoint(elem, x, y);
+      if (color) {
+        updateColor(color.r, color.g, color.b);
+        return;
+      }
+    } catch (err) {
+      console.warn("無法從圖片取色:", err);
+    }
+  }
+
+  // 非圖片元素，嘗試讀取背景色
+  const style = window.getComputedStyle(elem);
+  let bgColor = style.backgroundColor;
+
+  if (bgColor && bgColor !== "rgba(0, 0, 0, 0)" && bgColor !== "transparent") {
+    // 解析 rgb(a)
+    const rgb = parseRGB(bgColor);
+    if (rgb) {
+      updateColor(rgb.r, rgb.g, rgb.b);
+      return;
+    }
+  }
+
+  // 嘗試讀文字顏色
+  let color = style.color;
+  const rgb = parseRGB(color);
+  if (rgb) {
+    updateColor(rgb.r, rgb.g, rgb.b);
+    return;
+  }
+
+  // 都沒抓到顏色時，預設白色
+  updateColor(255, 255, 255);
+});
+
+// 從 <img> 元素在頁面點擊座標抓顏色
+async function getColorFromImageAtPoint(imgElem, pageX, pageY) {
+  // 取得圖片在頁面上的位置
+  const rect = imgElem.getBoundingClientRect();
+  const xInImg = pageX - rect.left;
+  const yInImg = pageY - rect.top;
+
+  // 需要把圖片畫到canvas上才能取像素
+  const tmpCanvas = document.createElement("canvas");
+  const ctx = tmpCanvas.getContext("2d");
+
+  // 以圖片實際大小為canvas大小
+  tmpCanvas.width = imgElem.naturalWidth;
+  tmpCanvas.height = imgElem.naturalHeight;
+
+  // 等圖片載入完成
+  if (!imgElem.complete) {
+    await new Promise(r => imgElem.onload = r);
+  }
+
+  ctx.drawImage(imgElem, 0, 0, tmpCanvas.width, tmpCanvas.height);
+
+  // 轉換座標比例，因為圖片可能縮放
+  const scaleX = tmpCanvas.width / rect.width;
+  const scaleY = tmpCanvas.height / rect.height;
+  const imgX = Math.floor(xInImg * scaleX);
+  const imgY = Math.floor(yInImg * scaleY);
+
+  if (imgX < 0 || imgY < 0 || imgX >= tmpCanvas.width || imgY >= tmpCanvas.height) return null;
+
+  const data = ctx.getImageData(imgX, imgY, 1, 1).data;
+  return { r: data[0], g: data[1], b: data[2] };
+}
+
+// 解析 rgb(a) 文字成物件 {r,g,b}
+function parseRGB(rgbStr) {
+  const m = rgbStr.match(/rgba?\((\d+), ?(\d+), ?(\d+)/);
+  if (!m) return null;
+  return {
+    r: parseInt(m[1], 10),
+    g: parseInt(m[2], 10),
+    b: parseInt(m[3], 10),
+  };
+}
   </script>
   
 </body>
