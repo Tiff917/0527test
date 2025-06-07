@@ -642,6 +642,17 @@
       box-sizing: border-box;
     }
       /* 響應式 */
+     @media (max-width: 768px) {
+        .gallery {
+          column-count: 2;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .gallery {
+          column-count: 1;
+        }
+      }
      @media (min-width: 431px) and (max-width: 1199px) {
     .gallery {
         margin: 180px auto auto auto;
