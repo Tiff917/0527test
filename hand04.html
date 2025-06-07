@@ -696,6 +696,11 @@ html, body {
     box-sizing: border-box;
 }
 
+body.overlay-open .header2,
+body.overlay-open header,
+body.overlay-open .bg-overlay {
+  display: none !important;
+}
     </style>
 </head>
 <body>
@@ -770,156 +775,147 @@ html, body {
                     <button class="next-button" id="nextBtn" aria-label="下一張圖片">&#10095;</button>
                   </div>
                 
-                  <script>
-                      document.addEventListener('DOMContentLoaded', function() {
-            // 獲取所有圖片容器
-            const imageContainers = document.querySelectorAll('.image-hover-container');
-            const overlay = document.querySelector('.overlay');
-            const enlargedImage = document.getElementById('enlargedImage');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            
-            let currentIndex = 0;
-            const images = Array.from(imageContainers).map(container => 
-                container.querySelector('.hover-image')
-            );
+                 <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const imageContainers = document.querySelectorAll('.image-hover-container');
+  const overlay = document.querySelector('.overlay');
+  const enlargedImage = document.getElementById('enlargedImage');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
-            // 點擊圖片打開放大視窗
-            imageContainers.forEach((container, index) => {
-                container.addEventListener('click', (e) => {
-                e.preventDefault();
-                currentIndex = index;
-                updateEnlargedImage();
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // 防止背景滾動
-                });
-            });
+  let currentIndex = 0;
+  const images = Array.from(imageContainers).map(container =>
+    container.querySelector('.hover-image')
+  );
 
-            // 更新放大圖片
-            function updateEnlargedImage() {
-                const imgSrc = images[currentIndex].getAttribute('src');
-                const imgAlt = images[currentIndex].getAttribute('alt');
-                enlargedImage.setAttribute('src', imgSrc);
-                enlargedImage.setAttribute('alt', imgAlt);
-            }
+  // 點擊圖片打開放大視窗
+  imageContainers.forEach((container, index) => {
+    container.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentIndex = index;
+      updateEnlargedImage();
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('overlay-open'); // ✅ 加這一行
+    });
+  });
 
-            // 上一張按鈕
-            prevBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                updateEnlargedImage();
-            });
+  function updateEnlargedImage() {
+    const imgSrc = images[currentIndex].getAttribute('src');
+    const imgAlt = images[currentIndex].getAttribute('alt');
+    enlargedImage.setAttribute('src', imgSrc);
+    enlargedImage.setAttribute('alt', imgAlt);
+  }
 
-            // 下一張按鈕
-            nextBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentIndex = (currentIndex + 1) % images.length;
-                updateEnlargedImage();
-            });
+  prevBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateEnlargedImage();
+  });
 
-            // 關閉放大視窗
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay || e.target.classList.contains('enlarged')) {
-                overlay.classList.remove('active');
-                document.body.style.overflow = 'auto';
-                }
-            });
+  nextBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % images.length;
+    updateEnlargedImage();
+  });
 
-            // 鍵盤控制
-            document.addEventListener('keydown', (e) => {
-                if (!overlay.classList.contains('active')) return;
-                
-                switch(e.key) {
-                case 'ArrowLeft':
-                    currentIndex = (currentIndex - 1 + images.length) % images.length;
-                    updateEnlargedImage();
-                    break;
-                case 'ArrowRight':
-                    currentIndex = (currentIndex + 1) % images.length;
-                    updateEnlargedImage();
-                    break;
-                case 'Escape':
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                    break;
-                }
-            });
-            });
-                      // 漢堡選單控制
-                      const hamburger = document.querySelector('.hamburger');
-                    const section1List = document.querySelector('.section1-list');
-                    let autoCloseTimer = null;
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay || e.target.classList.contains('enlarged')) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      document.body.classList.remove('overlay-open'); // ✅ 移除 class
+    }
+  });
 
-                    hamburger.addEventListener('click', () => {
-                        const isShowing = section1List.classList.contains('show');
+  document.addEventListener('keydown', (e) => {
+    if (!overlay.classList.contains('active')) return;
 
-                        if (isShowing) {
-                        section1List.classList.remove('show');
-                        if (autoCloseTimer) clearTimeout(autoCloseTimer);
-                        } else {
-                        section1List.classList.add('show');
-                        if (autoCloseTimer) clearTimeout(autoCloseTimer);
-                        autoCloseTimer = setTimeout(() => {
-                            section1List.classList.remove('show');
-                        }, 5000); // ⏱ 5 秒自動收起
-                        }
-                    });
+    switch (e.key) {
+      case 'ArrowLeft':
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateEnlargedImage();
+        break;
+      case 'ArrowRight':
+        currentIndex = (currentIndex + 1) % images.length;
+        updateEnlargedImage();
+        break;
+      case 'Escape':
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        document.body.classList.remove('overlay-open'); // ✅ 移除 class
+        break;
+    }
+  });
+  
+  // ↓↓↓ 漢堡選單的 JS 你保留原本 ↓↓↓
 
-                    // 點擊外部區域也會自動收起（可選）
-                    document.addEventListener('click', (e) => {
-                        if (
-                        !section1List.contains(e.target) &&
-                        !hamburger.contains(e.target)
-                        ) {
-                        section1List.classList.remove('show');
-                        if (autoCloseTimer) clearTimeout(autoCloseTimer);
-                        }
-                    });
-                    const menuToggle = document.getElementById('menu-toggle');
+  const hamburger = document.querySelector('.hamburger');
+  const section1List = document.querySelector('.section1-list');
+  let autoCloseTimer = null;
 
-                    menuToggle.addEventListener('change', () => {
-                    if (menuToggle.checked) {
-                        // 開啟時，5秒後自動收回
-                        setTimeout(() => {
-                        menuToggle.checked = false;
-                        }, 5000);
-                    }
-                    });
-                    let lastScrollTop = 0;
-                    const section1 = document.querySelector('.section1');
+  hamburger.addEventListener('click', () => {
+    const isShowing = section1List.classList.contains('show');
+    if (isShowing) {
+      section1List.classList.remove('show');
+      if (autoCloseTimer) clearTimeout(autoCloseTimer);
+    } else {
+      section1List.classList.add('show');
+      if (autoCloseTimer) clearTimeout(autoCloseTimer);
+      autoCloseTimer = setTimeout(() => {
+        section1List.classList.remove('show');
+      }, 5000);
+    }
+  });
 
-                    window.addEventListener('scroll', function () {
-                        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  document.addEventListener('click', (e) => {
+    if (!section1List.contains(e.target) && !hamburger.contains(e.target)) {
+      section1List.classList.remove('show');
+      if (autoCloseTimer) clearTimeout(autoCloseTimer);
+    }
+  });
 
-                        if (scrollTop > 50) {
-                        if (scrollTop > lastScrollTop) {
-                            // 向下滑動 - 隱藏
-                            section1.style.opacity = '0';
-                            section1.style.pointerEvents = 'none';
-                        } else {
-                            // 向上滑動 - 顯示
-                            section1.style.opacity = '1';
-                            section1.style.pointerEvents = 'auto';
-                        }
-                        } else {
-                        // 回到頂部也顯示
-                        section1.style.opacity = '1';
-                        section1.style.pointerEvents = 'auto';
-                        }
+  const menuToggle = document.getElementById('menu-toggle');
+  menuToggle.addEventListener('change', () => {
+    if (menuToggle.checked) {
+      setTimeout(() => {
+        menuToggle.checked = false;
+      }, 5000);
+    }
+  });
 
-                        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-                    });
-                    window.addEventListener("scroll", function () {
-                        const header = document.querySelector(".header2");
-                        const threshold = 100; // 捲動多少 px 後觸發效果
+  let lastScrollTop = 0;
+  const section1 = document.querySelector('.section1');
 
-                        if (window.scrollY > threshold) {
-                        header.classList.add("shrink");
-                        } else {
-                        header.classList.remove("shrink");
-                        }
-                    });
-                    </script>
+  window.addEventListener('scroll', function () {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    if (scrollTop > 50) {
+      if (scrollTop > lastScrollTop) {
+        section1.style.opacity = '0';
+        section1.style.pointerEvents = 'none';
+      } else {
+        section1.style.opacity = '1';
+        section1.style.pointerEvents = 'auto';
+      }
+    } else {
+      section1.style.opacity = '1';
+      section1.style.pointerEvents = 'auto';
+    }
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+  });
+
+  window.addEventListener("scroll", function () {
+    const header = document.querySelector(".header2");
+    const threshold = 100;
+    if (window.scrollY > threshold) {
+      header.classList.add("shrink");
+    } else {
+      header.classList.remove("shrink");
+    }
+  });
+
+});
+</script>
+
                   
                 
 </body>
