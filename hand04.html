@@ -645,9 +645,10 @@
 
      @media (min-width: 431px) and (max-width: 1199px) {
     .gallery {
-        margin: 180px 30px auto 30px;
+        column-count: 2;
+        margin: 180px auto auto auto;
         width: 80%;
-       
+        text-align: center;        /* 可輔助圖片置中 */
     }
     .header2 h1 {
     font-size: 80px;
@@ -663,8 +664,9 @@
 @media (max-width: 430px) {
     .gallery {
         column-count: 1;
-        margin: 180px 30px auto 30px;
+        margin: 180px auto auto auto;
         width: 80%;
+        text-align: center;        /* 可輔助圖片置中 */
         
     }
     .header2 h1 {
