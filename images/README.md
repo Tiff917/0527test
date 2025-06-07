@@ -92,7 +92,5 @@
 ![003](https://raw.githubusercontent.com/Tiff917/0527test/main/images/003.jpg)
 ![004](https://raw.githubusercontent.com/Tiff917/0527test/main/images/004.png)
 ![005](https://raw.githubusercontent.com/Tiff917/0527test/main/images/005.png)
-![006](https://raw.githubusercontent.com/Tiff917/0527test/main/images/006.png)
-![007](https://raw.githubusercontent.com/Tiff917/0527test/main/images/007.png)
 ![008](https://raw.githubusercontent.com/Tiff917/0527test/main/images/008.png)
 ![009](https://raw.githubusercontent.com/Tiff917/0527test/main/images/009.png)
