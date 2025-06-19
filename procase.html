@@ -523,18 +523,37 @@ h2 {
     width: 100vw;
     padding: 0;
     display: block;
+    margin: 0 auto;
   }
   .photo {
     width: 100%;
     margin: 10px 0;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .photo img {
     width: 90vw;
     height: auto;
     display: block;
     border-radius: var(--radius);  /* 你也可以用 var(--radius) */
+  }
+.photo img,
+  .image-hover-container img {
+    width: 90vw;
+    height: auto;
+    display: block;
+    border-radius: var(--radius); /* 或 var(--radius) */
+    box-shadow: none;
+    border: none;
+    margin: 0 auto;
+    background: none;
+  }
+  .image-hover-container {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    background: none;
   }
 }
 
