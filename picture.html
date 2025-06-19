@@ -667,14 +667,8 @@
     }
 }
 
-@media (max-width: 430px) {
-    .gallery {
-        column-count: 1;
-        margin: 180px auto auto auto;
-        width: 75%;
-        text-align: center;        /* 可輔助圖片置中 */
-        
-    }
+@media (max-width: 480px) {
+   
     .header2 h1 {
     font-size: 80px;
     white-space: nowrap;
@@ -684,11 +678,54 @@
     margin: 0;       /* 建議把 margin 先取消，避免影響定位 */
     z-index: 10;   /* 確保在最上層 */
   }
-    .home-button {
-    position: absolute;
-    right: 5px;
-    bottom: -35px;
-    }
+.gallery {
+    column-count: 1;
+    width: 100vw;
+    padding: 0;
+    margin-top: 180px;   /* 下移50px */
+    display: block;
+  }
+  .photo {
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .photo img {
+    width: 80vw;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);  /* 你也可以用 var(--radius) */
+  }
+.photo img,
+  .image-hover-container img {
+    width: 80vw;
+    height: auto;
+    display: block;
+    border-radius: var(--radius); /* 或 var(--radius) */
+    box-shadow: none;
+    border: none;
+    margin: 0 auto;
+    background: none;
+  }
+  .image-hover-container {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    background: none;
+  }
+  .hover-overlay {
+    display: none !important;  /* 完全隱藏hover文字 */
+  }
+  .image-hover-container:hover .hover-overlay {
+    opacity: 0 !important;     /* 移除hover效果 */
+  }
+ .home-button {
+    margin: 20px 0px 20px 20px;
+}
+
+
 }
 
 
