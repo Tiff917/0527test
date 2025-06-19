@@ -522,7 +522,7 @@ h2 {
 .gallery {
     width: 100vw;
     padding: 0;
-    margin-top: 50px; 
+    margin-top: 80px;   /* 下移50px */
     display: block;
     margin: 0 auto;
   }
@@ -555,6 +555,12 @@ h2 {
     box-shadow: none;
     padding: 0;
     background: none;
+  }
+  .hover-overlay {
+    display: none !important;  /* 完全隱藏hover文字 */
+  }
+  .image-hover-container:hover .hover-overlay {
+    opacity: 0 !important;     /* 移除hover效果 */
   }
  
 
