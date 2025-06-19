@@ -39,11 +39,10 @@ body {
 .bg-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: url('images/Back02.png') no-repeat center center fixed;
+    background: url('images/back002.png') no-repeat center center fixed;
     background-size: cover;
-    opacity: 0.9;
-    z-index: -1000;
-    pointer-events: none;
+    opacity: 0.3;
+    z-index: 0;
 }
 
 .wrapper {
@@ -520,8 +519,6 @@ h2 {
     margin: 0;       /* 建議把 margin 先取消，避免影響定位 */
     z-index: 10;   /* 確保在最上層 */
   }
-  
-}
 }
 
 
@@ -549,32 +546,32 @@ html, body {
             <input type="checkbox" id="menu-toggle" />
             <label for="menu-toggle" class="hamburger">☰</label>
             <ul class="section1-list">
-                  <li><a href="handdraw.html">手繪</a></li>
-                  <li><a href="computer.html">電繪</a></li>
-                  <li><a href="picture.html">攝影</a></li>
-                  <li><a href="project.html">專案</a></li>
+                  <li><a href="hand02.html">手繪</a></li>
+                  <li><a href="hand03.html">電繪</a></li>
+                  <li><a href="hand04.html">攝影</a></li>
+                  <li><a href="hand05.html">專案</a></li>
                 </ul>
               </section>                         
                 <div class="bg-overlay"></div>
                 <div class="gallery">
-                    <div class="photo"><div class="image-hover-container"><img src="images/001.png" alt="風景水彩" class="hover-image"/><div class="hover-overlay"><p>風景水彩<br>2022</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/002.png" alt="單點透視設計" class="hover-image"/><div class="hover-overlay"><p>單點透視設計<br>2023</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/003.jpg" alt="產品素描" class="hover-image"/><div class="hover-overlay"><p>產品素描<br>2024</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/004.png" alt="產品04" class="hover-image"/><div class="hover-overlay"><p>石雕素描<br>2023</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/005.png" alt="產品05" class="hover-image"/><div class="hover-overlay"><p>傾倒的夢<br>2022</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/606021.png" alt="靜物素描06" class="hover-image"/><div class="hover-overlay"><p>俯瞰寒冬<br>2025</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/606019.png" alt="水彩01" class="hover-image"/><div class="hover-overlay"><p>雪<br>2025</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/606011.png" alt="水彩02" class="hover-image"/><div class="hover-overlay"><p>海雲台海水浴場<br>2025</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/606029.png" alt="水彩03" class="hover-image"/><div class="hover-overlay"><p>午後的日本<br>2024</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/606033.png" alt="水彩04" class="hover-image"/><div class="hover-overlay"><p>底片像捲<br>2024</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/606026.png" alt="水彩05" class="hover-image"/><div class="hover-overlay"><p>香港街頭<br>2025</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/Mee.png" alt="水彩06" class="hover-image"/><div class="hover-overlay"><p>Myself<br>202</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/009.png" alt="水彩06" class="hover-image"/><div class="hover-overlay"><p>畢業紀念冊提案<br>2024</p></div></div></div>  
+                    <div class="photo"><div class="image-hover-container"><img src="images/001.png" alt="產品01" class="hover-image"/><div class="hover-overlay"><p>產品精摩<br>2023</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/002.png" alt="產品02" class="hover-image"/><div class="hover-overlay"><p>產品素描<br>2023</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/003.jpg" alt="產品03" class="hover-image"/><div class="hover-overlay"><p>產品素描<br>2023</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/004.png" alt="產品04" class="hover-image"/><div class="hover-overlay"><p>產品素描<br>2023</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/005.png" alt="產品05" class="hover-image"/><div class="hover-overlay"><p>產品素描<br>2023</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/606021.png" alt="靜物素描06" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/606019.png" alt="水彩01" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/606011.png" alt="水彩02" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/606029.png" alt="水彩03" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/606033.png" alt="水彩04" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/606026.png" alt="水彩05" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/008.png" alt="水彩06" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/009.png" alt="水彩06" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>  
 
                   </div>
                   </div>
               
-                <a href="home.html" class="home-button">Back to Home</a>
+                <a href="https://yujie0917.w3spaces.com/" class="home-button">Back to Home</a>
               
                 <!-- 放大彈出層 -->
                 <div class="overlay" id="imageOverlay" tabindex="-1" aria-hidden="true">
