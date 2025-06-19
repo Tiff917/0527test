@@ -520,8 +520,16 @@ h2 {
     z-index: 10;   /* 確保在最上層 */
   }
 img.rotate-on-mobile {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
     /* 若旋轉後有切到邊，可以加縮放 */
+    width: 90vw;
+    height: auto;
+    max-width: 100vh;
+    max-height: 100vw;
+    display: block;
+    margin: 0 auto;
+    border-radius:  var(--radius); 
+    object-fit: cover; /* 可視需求選擇 */
   }
 }
 
