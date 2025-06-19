@@ -520,8 +520,27 @@ h2 {
     margin: 0;       /* 建議把 margin 先取消，避免影響定位 */
     z-index: 10;   /* 確保在最上層 */
   }
+  img {
+    transform: rotate(90deg);
+  }
+}
 }
 
+.rotate-on-mobile {
+  transition: transform 0.3s ease;
+}
+
+/* 手機畫面時才旋轉 90 度 */
+@media screen and (max-width: 768px) {
+  .rotate-on-mobile {
+    transform: rotate(90deg);
+    transform-origin: center center;
+    width: auto;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+}
 
 html, body {
     margin: 0;
@@ -563,8 +582,8 @@ html, body {
                     <div class="photo"><div class="image-hover-container"><img src="images/606021.png" alt="靜物素描06" class="hover-image"/><div class="hover-overlay"><p>俯瞰寒冬<br>2025</p></div></div></div>
                     <div class="photo"><div class="image-hover-container"><img src="images/606019.png" alt="水彩01" class="hover-image"/><div class="hover-overlay"><p>雪<br>2025</p></div></div></div>
                     <div class="photo"><div class="image-hover-container"><img src="images/606011.png" alt="水彩02" class="hover-image"/><div class="hover-overlay"><p>海雲台海水浴場<br>2025</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/606029.png" alt="水彩03" class="hover-image"/><div class="hover-overlay"><p>午後的日本<br>2024</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/606033.png" alt="水彩04" class="hover-image"/><div class="hover-overlay"><p>底片像捲<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/606029.png" alt="水彩03" class="hover-image-on-mobile"/><div class="hover-overlay"><p>午後的日本<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/606033.png" alt="水彩04" class="hover-image-on-mobile"/><div class="hover-overlay"><p>底片像捲<br>2024</p></div></div></div>
                     <div class="photo"><div class="image-hover-container"><img src="images/606026.png" alt="水彩05" class="hover-image"/><div class="hover-overlay"><p>香港街頭<br>2025</p></div></div></div>
                     <div class="photo"><div class="image-hover-container"><img src="images/Mee.png" alt="水彩06" class="hover-image"/><div class="hover-overlay"><p>Myself<br>202</p></div></div></div>
                     <div class="photo"><div class="image-hover-container"><img src="images/009.png" alt="水彩06" class="hover-image"/><div class="hover-overlay"><p>畢業紀念冊提案<br>2024</p></div></div></div>  
