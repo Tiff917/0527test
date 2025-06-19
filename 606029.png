@@ -1,5 +1,1 @@
-@media screen and (max-width: 1199px) {
-  img {
-    transform: rotate(-90deg);
-  }
-}
+
