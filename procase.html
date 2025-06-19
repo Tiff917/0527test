@@ -519,6 +519,37 @@ h2 {
     margin: 0;       /* 建議把 margin 先取消，避免影響定位 */
     z-index: 10;   /* 確保在最上層 */
   }
+.gallery {
+    column-count: 1;      /* 單欄直排 */
+    column-gap: 0;
+    width: 90vw;
+    margin: 0 auto;
+    padding: 10px 0;
+  }
+  .photo {
+    width: 100%;
+    margin: 0 0 20px 0;
+    display: block;
+    break-inside: avoid;
+  }
+  .photo img {
+    width: 100%;             /* 滿版 */
+    height: auto;
+    display: block;
+    border-radius: 20px;     /* 圓角，和你的變數一致可改成 var(--radius) */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04); /* 可選 */
+    object-fit: cover;
+  }
+  /* 不需要 hover-overlay，直接隱藏 */
+  .hover-overlay {
+    display: none !important;
+  }
+  .image-hover-container {
+    padding: 0;
+    border-radius: 20px;      /* 若有包一層也圓角 */
+    overflow: hidden;
+    box-shadow: none;
+  }
 .image-hover-container {
     aspect-ratio: 1/1;
     width: 100%;
