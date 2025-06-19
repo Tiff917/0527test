@@ -519,11 +519,24 @@ h2 {
     margin: 0;       /* 建議把 margin 先取消，避免影響定位 */
     z-index: 10;   /* 確保在最上層 */
   }
-img.rotate-on-mobile {
+.image-hover-container {
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: var(--radius);
+  }
+  img.rotate-on-mobile {
     transform: rotate(-90deg);
-    /* 若旋轉後有切到邊，可以加縮放 */
-    width: 90vw;
-    border-radius:  var(--radius); 
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 
@@ -571,7 +584,7 @@ html, body {
                     <div class="photo"><div class="image-hover-container"><img src="images/606029.png" alt="水彩03" class="hover-image rotate-on-mobile"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
                     <div class="photo"><div class="image-hover-container"><img src="images/606033.png" alt="水彩04" class="hover-image rotate-on-mobile"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
                     <div class="photo"><div class="image-hover-container"><img src="images/606026.png" alt="水彩05" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
-                    <div class="photo"><div class="image-hover-container"><img src="images/008.png" alt="水彩06" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+                    <div class="photo"><div class="image-hover-container"><img src="images/Mee.png" alt="水彩06" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
                     <div class="photo"><div class="image-hover-container"><img src="images/009.png" alt="水彩06" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>  
 
                   </div>
