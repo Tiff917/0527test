@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>project03</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      max-width: 100vw;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      overflow-x: hidden;
+    }
+    .center-image {
+  display: block;
+  margin: 20vw auto; /* 自動左右外距可置中 */
+  max-width: 100%;   /* 確保圖片不會超出容器寬度 */
+  height: auto;      /* 自動依比例調整高度 */
+  border-radius: 8px; /* 如果你要保留一點圓角（可省略） */
+}
+
+    
+
+    .block.first {
+      width: 100vw;
+      height: 250px; /* 設定高度方便展示排版效果 */
+      display: flex;
+      align-items: stretch;
+      box-sizing: border-box;
+      background-color: #f0f0f0;
+      position: relative;
+    }
+
+    .left-box {
+  width: 100px;
+  color: #333a39;
+  margin-left: 10vw;
+  font-size: 200px; /* 適當調整字體大小 */
+  text-align: center;
+  line-height: 1.2;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.right-box {
+  width: 200px;
+  height: 50%;
+  color: rgb(229, 229, 229);
+  font-size: 64px;
+  text-align: center;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: -10px;
+}
+.right-box1 {
+  width: 100px;
+  height: 50%;
+  color:#333a39;
+  font-size: 72px;
+  text-align: center;
+  padding: 4px 0;
+  margin-top: -500px;
+  margin-left:  40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+    
+    .block {
+  padding: 2em;
+  margin-bottom: 1.5em;
+  background-color: transparent; /* 移除背景 */
+  border-radius: 0;              /* 移除圓角 */
+  box-shadow: none;              /* 移除陰影 */
+}
+
+.block.first {
+  width: 100vw;
+  box-sizing: border-box;
+  background-color: #a6a6a6; /* 如果想要透明 */
+  border-radius: 0;              /* 確保沒有圓角 */
+}
+
+    /* 第二到第七塊 80vw + 置中 */
+    .block:not(.first) {
+      width: 80vw;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 36px;
+      color: #76726c;
+      line-height: 1.8;
+    }
+
+    p {
+      margin-bottom: 0;
+      font-size: 24px;
+      color: #76726c;
+      line-height: 1.8;
+    }
+    .home-button {
+    position: absolute;
+    right: 5px;
+    bottom: -1720px;
+    z-index: 10001;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border-radius: 25px;
+    font-size: 16px;
+    text-decoration: none;
+    border: 1px solid #ffffff;
+}
+
+
+    .home-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    }
+    @media (max-width: 430px) {
+
+  .block.first {
+    justify-content: center; /* 讓子元素水平置中 */
+    height: 150px;
+
+  }
+ 
+  .left-box {
+    margin-left: 0; /* 手機上取消原本的 10vw 左邊距 */
+    font-size: 120px;
+    margin-top: 10px;
+    margin-left:-70px;
+  }
+
+  .right-column {
+    margin-left: 20px; /* 視覺上保持一點距離 */
+  }
+  .right-box{
+   font-size: 36px;
+   margin-left: -80px;
+  
+  }
+  .right-box1{
+    font-size: 36px;
+    margin-left: -30px;
+    margin-top: -20px;
+  }
+  .block h2{
+    font-size: 22px;
+    margin-top: -30px;
+  }
+  .block p{
+    font-size: 18px;
+    margin-top: 10px;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <div class="block first">
+        <div class="left-box">A</div>
+        
+        <div class="right-column">
+          <div class="right-box">御風匣</div>
+          <div class="right-box1">scend</div>
+        </div>
+  </div>
+
+  <div class="block">
+    <h2>設計概念<br>
+        Design concept</h2>
+    <p>這款智能抽油煙機採用磁吸式設計，安裝於瓦斯爐後方牆面，能即時偵測油煙並以仰角展開，透過近距離技術迅速吸除油煙，角度能依用戶需求調整。面板整合觸控螢幕，提供動態食譜教學與虛擬廚師指導，。搭載追蹤鏡頭，可錄製烹飪過程並分析食材熟度，手機掃描菜餚後即顯示營養數據與擺盤建議，讓廚房升級為智能烹飪空間。</p>
+  </div>
+
+  <div class="block">
+    <h2>立體造型構成<br>
+        three-dimensional contouring</h2>
+    <p>機身仿香菇與枯木，希望以食材下去做造型是希望置於廚房中不顯突兀，3公分厚度整合多層結構，陶瓷塗層外殼抗高溫與指紋，側邊兼具散熱與音響共鳴功能。磁吸背板能適應不同牆面材質，頂部伸縮鏡頭可切換魚眼視角錄影。
+    </p>
+  </div>
+
+  <div class="block">
+    <h2>設計呈現<br>
+        Presentation Design</h2>
+    <p>以「預防勝於治療」為核心，在油煙形成瞬間啟動吸附，專利渦旋層技術模仿生物捕食機制，高效分解油煙粒子。介面設計如互動食譜書，翻頁時模擬紙張觸感與聲響。智能監測使用時長，減少油煙對呼吸系統的長期傷害，同時提升烹飪樂趣。</p>
+  </div>
+
+  <div class="block">
+    <h2>海報呈現<br>
+        Poster Display</h2>
+        <img src="images/pro03.png" alt="海報圖片" class="center-image">
+  </div>
+
+  <div class="block">
+    <h2>創作媒材<br>
+        medium</h2>
+    <p>3D列印以及賽璐片（螢幕面）</p>
+  </div>
+
+  <div class="block">
+    <h2>UX/UI模擬<br>
+        （Figma）</h2>
+    <p>這是第七塊內容，寬度為 80vw，並且置中顯示。</p>
+  </div>
+
+  <div class="block">
+    <h2>設計者<br>
+        designer</h2>
+    <p>蕭語婕，郭怡靖</p>
+  </div>
+
+  <a href="home.html" class="home-button">Back to Home</a>
+</body>
+</html>
