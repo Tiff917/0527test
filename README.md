@@ -2,7 +2,6 @@
 ![我的圖片](images/com01.png)
 ![我的圖片](images/com02.png)
 ![我的圖片](images/com03.png)
-![我的圖片](images/com003.mp4)
 ![我的圖片](images/Mee.png)
 ![我的圖片](images/pro001.png)
 ![我的圖片](images/pro002.png)
