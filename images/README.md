@@ -1,5 +1,4 @@
-![我的圖片](images/Back02.png)
-![我的圖片](https://raw.githubusercontent.com/Tiff917/0527test/main/images/com003.mp4)
+
 ![我的圖片](https://raw.githubusercontent.com/Tiff917/0527test/main/images/com01.png)
 ![我的圖片](https://raw.githubusercontent.com/Tiff917/0527test/main/images/com02.png)
 ![我的圖片](https://raw.githubusercontent.com/Tiff917/0527test/main/images/com03.png)
